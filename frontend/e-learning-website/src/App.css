@@ -227,13 +227,24 @@
 
 .Admin-container{
     padding-top: 100px;
-    padding-left: 20px;
     max-width: 500px;
     margin:  auto;
     overflow: auto;
     min-height: 300px;
     border: 1px solid steelblue;
     border-radius: 5px;
+    
+}
+
+.Admin-container > form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+}
+
+.Admin-container > form > input{
+    height: 40px;
 }
 
 /*****************/
