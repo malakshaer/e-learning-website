@@ -9,4 +9,12 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Assignment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'subject',
+        'text',
+        'instructors_id',
+        'students_id',
+    ];
 }
