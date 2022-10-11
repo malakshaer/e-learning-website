@@ -31,6 +31,9 @@ Route::group(["prefix" => "auth"], function () {
         Route::post("/assignCourse", [LandingController::class, "assignCourseToInstructor"]);
         Route::post("/createAnnouncements", [LandingController::class, "createAnnouncements"]);
 
+        Route::delete("/removeAssignment", [LandingController::class, "removeAssignment"]);
+        Route::delete("/removeAnnouncement", [LandingController::class, "removeAnnouncement"]);
+
         //StudentController
         Route::get("/getStudents", [StudentController::class, "getStudents"]);
         Route::get("/getSingleStudent/{id}", [StudentController::class, "getSingleStudent"]);
