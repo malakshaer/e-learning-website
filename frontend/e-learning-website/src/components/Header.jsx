@@ -17,8 +17,8 @@ const navLinks = [
     url: "#",
   },
   {
-    display: "Register",
-    url: "/Footer",
+    display: "login",
+    url: "#",
   },
 ];
 
