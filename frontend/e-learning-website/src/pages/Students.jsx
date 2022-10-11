@@ -1,5 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
+import StudentHeader from "../components/StudentHeader";
 
-export default function Students() {
-  return <div>Students</div>;
-}
+const Students = () => {
+  return (
+    <Fragment>
+      <StudentHeader />
+    </Fragment>
+  );
+};
+export default Students;
