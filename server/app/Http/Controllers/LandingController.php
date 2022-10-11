@@ -146,10 +146,10 @@ class LandingController extends Controller
     {
 
         //Get all Instructors
-        return $Instructors = Instructor::all();
+        return $instructors = Instructor::all();
 
         //If no instructors, display error
-        if ($Instructors->isEmpty()) {
+        if ($instructors->isEmpty()) {
             return response()->json([
                 'status' => "Error",
                 'message' => "No Instructors"
@@ -160,11 +160,11 @@ class LandingController extends Controller
     function getSingleInstructor($id)
     {
 
-        //Get Instructor
-        return $Instructor = Instructor::where("id", "=", $id)->get();
+        //Get Single Instructor
+        return $instructor = Instructor::where("id", "=", $id)->get();
 
-        //If no instructors, display error
-        if ($Instructor->isEmpty()) {
+        //If no instructor, display error
+        if ($instructor->isEmpty()) {
             return response()->json([
                 'status' => "Error",
                 'message' => "No Instructor"
@@ -172,18 +172,69 @@ class LandingController extends Controller
         }
     }
 
-    function getAssignments($id)
+    function getCourses()
     {
 
-        //Get Assignments
-        return Assignment::where("id", $id)->get();
+        //Get all Courses
+        return $courses = Course::all();
 
-        //If no instructors, display error
-        if ($id->isEmpty()) {
+        //If no courses, display error
+        if ($courses->isEmpty()) {
+            return response()->json([
+                'status' => "Error",
+                'message' => "No Instructors"
+            ], 400);
+        }
+    }
+
+    function getSingleCourse($id)
+    {
+
+        //Get Single Course
+        return $course = Course::where("id", "=", $id)->get();
+
+        //If no course, display error
+        if ($course->isEmpty()) {
             return response()->json([
                 'status' => "Error",
                 'message' => "No Instructor"
             ], 400);
         }
+    }
+
+    function getAssignments()
+    {
+        //Get Assignments
+        $assignments =  Assignment::all()->orderBy('id', 'Desc')->get();
+
+        //send back response
+        return response()->json($assignments);
+    }
+
+    function getSingleAssignment($id)
+    {
+        //Get Single Assignment
+        $assignment =  Assignment::where('id', $id)->get();
+
+        //send back response
+        return response()->json($assignment);
+    }
+
+    function getAnnouncements()
+    {
+        //Get Announcements
+        $announcements =  Announcement::all()->orderBy('id', 'Desc')->get();
+
+        //send back response
+        return response()->json($announcements);
+    }
+
+    function getSingleAnnouncement($id)
+    {
+        //Get Single Announcement
+        $announcement =  Announcement::where('id', $id)->get();
+
+        //send back response
+        return response()->json($announcement);
     }
 }
