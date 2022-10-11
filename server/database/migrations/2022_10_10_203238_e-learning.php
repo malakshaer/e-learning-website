@@ -55,6 +55,8 @@ return new class extends Migration
             $collection->id();
             $collection->string('subject');
             $collection->string('text');
+            $collection->timestamps();
+            $collection->datetime('deadline');
             $collection->integer("students_id")->references('id')->on("students");
             $collection->integer("instructors_id")->references('id')->on("instructors");
         });
@@ -63,6 +65,7 @@ return new class extends Migration
             $collection->id();
             $collection->string('subject');
             $collection->string('text');
+            $collection->timestamps();
             $collection->integer("students_id")->references('id')->on("students");
             $collection->integer("instructors_id")->references('id')->on("instructors");
         });
