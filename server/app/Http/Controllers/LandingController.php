@@ -113,8 +113,8 @@ class LandingController extends Controller
     function createAssignments(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'subject' => 'required',
-            'text' => 'required',
+            'subject' => 'required|string',
+            'text' => 'required|string',
         ]);
 
         //Add Assignment
@@ -129,8 +129,8 @@ class LandingController extends Controller
     function createAnnouncements(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'subject' => 'required',
-            'text' => 'required',
+            'subject' => 'required|string',
+            'text' => 'required|string',
         ]);
 
         //Add Announcements
@@ -236,5 +236,73 @@ class LandingController extends Controller
 
         //send back response
         return response()->json($announcement);
+    }
+
+    function removeAnnouncement(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|integer',
+            'subject' => 'required|string',
+            'text' => 'required|string',
+        ]);
+
+        //If the validation failed, display an error
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //Delete record from the table
+        $announcement = Announcement::where([
+            ['id', '=', $request->id],
+            ['subject', '=', $request->subject],
+            ['text', '=', $request->text],
+        ])->delete();
+
+        //If no record was returned back, display an error
+        if ($announcement == 0) {
+            return response()->json([
+                'status' => 'Not Announcement',
+            ], 201);
+        }
+
+        //send back response
+        return response()->json([
+            'status' => 'Deleted',
+        ], 201);
+    }
+
+    function removeAssignment(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|integer',
+            'subject' => 'required|string',
+            'text' => 'required|string',
+        ]);
+
+        //If the validation failed, display an error
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //Delete record from the table
+        $assignment = Assignment::where([
+            ['id', '=', $request->id],
+            ['subject', '=', $request->subject],
+            ['text', '=', $request->text],
+        ])->delete();
+
+        //If no record was returned back, display an error
+        if ($assignment == 0) {
+            return response()->json([
+                'status' => 'No assignment',
+            ], 201);
+        }
+
+        //send back response
+        return response()->json([
+            'status' => 'Deleted',
+        ], 201);
     }
 }
