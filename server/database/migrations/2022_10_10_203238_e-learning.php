@@ -13,6 +13,7 @@ return new class extends Migration
             $collection->string('name');
             $collection->string('email')->unique();
             $collection->string('password');
+            $collection->string("profile_image")->default("");
             $collection->integer("admins_id")->references('id')->on("admins");
         });
 
@@ -28,12 +29,11 @@ return new class extends Migration
             $collection->string('name');
             $collection->string('email')->unique();
             $collection->string('password');
+            $collection->string("profile_image")->default("");
             $collection->integer("admins_id")->references('id')->on("admins");
         });
 
         Schema::create('registers', function ($collection) {
-            $collection->integer('mark');
-            $collection->string('assignments');
             $collection->integer("courses_id")->references('id')->on("courses");
             $collection->integer("students_id")->references('id')->on("students");
         });
@@ -55,16 +55,16 @@ return new class extends Migration
             $collection->id();
             $collection->string('subject');
             $collection->string('text');
+            $collection->integer("students_id")->references('id')->on("students");
             $collection->integer("instructors_id")->references('id')->on("instructors");
-            $collection->integer("instructors_admins_id")->references('id')->on("instructors");
         });
 
         Schema::create('announcements', function ($collection) {
             $collection->id();
             $collection->string('subject');
             $collection->string('text');
+            $collection->integer("students_id")->references('id')->on("students");
             $collection->integer("instructors_id")->references('id')->on("instructors");
-            $collection->integer("instructors_admins_id")->references('id')->on("instructors");
         });
     }
 
